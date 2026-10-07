@@ -1,0 +1,230 @@
+A) User Manual Procedure
+Setting Up a GitHub Repository and Making a First Commit
+Purpose
+This procedure explains how to create a GitHub repository, connect it to a local project folder, and make the first commit.
+Prerequisites
+Before starting, you need:
+A computer.
+An internet connection.
+A GitHub account.
+Git installed on your computer.
+A text editor such as Visual Studio Code or Notepad.
+A project folder containing at least one file.
+Basic knowledge of using a computer and opening a terminal or command prompt.
+Step-by-Step Procedure
+Step 1: Open GitHub
+Action: Open GitHub in a web browser.
+Expected result: The GitHub website opens successfully.
+Step 2: Sign in to GitHub
+Action: Sign in using your GitHub username and password.
+Expected result: Your GitHub account homepage appears.
+Step 3: Create a new repository
+Action: Click the New repository option.
+Expected result: The repository creation page appears.
+Step 4: Enter the repository name
+Action: Enter my-first-project as the repository name.
+Expected result: The repository name appears in the repository name field.
+Step 5: Select repository visibility
+Action: Select Public as the repository visibility.
+Expected result: The repository is configured as public.
+Step 6: Create the repository
+Action: Click Create repository.
+Expected result: GitHub creates the repository and displays its repository page.
+Step 7: Open the project folder
+Action: Open the folder containing your project files.
+Expected result: The project files are displayed.
+Step 8: Open the terminal
+Action: Open a terminal inside the project folder.
+Expected result: The terminal opens in the project folder.
+Step 9: Initialize Git
+Action: Run git init.
+Expected result: Git initializes the project as a local Git repository.
+Step 10: Check the repository status
+Action: Run git status.
+Expected result: Git displays the files that are not currently tracked.
+Step 11: Add the project files
+Action: Run git add ..
+Expected result: The project files are added to the staging area.
+Step 12: Create the first commit
+Action: Run git commit -m "Initial commit".
+Expected result: Git creates the first commit.
+Step 13: Copy the repository URL
+Action: Copy the HTTPS URL from the GitHub repository page.
+Expected result: The repository URL is copied.
+Step 14: Connect the local repository to GitHub
+Action: Run git remote add origin YOUR_REPOSITORY_URL.
+Expected result: The local repository is connected to the GitHub repository.
+Step 15: Rename the branch
+Action: Run git branch -M main.
+Expected result: The current branch is renamed to main.
+Step 16: Push the commit
+Action: Run git push -u origin main.
+Expected result: The project files are uploaded to GitHub.
+Step 17: Refresh the GitHub repository
+Action: Refresh the repository page.
+Expected result: The project files and the Initial commit message appear on GitHub.
+Screenshot Description
+A screenshot should show the GitHub repository page after the first push.
+The screenshot should show:
+The repository name my-first-project.
+The uploaded project files.
+The main branch.
+The Initial commit message.
+Troubleshooting
+The most common beginner error is:
+'git' is not recognized as an internal or external command
+This usually means Git is not installed or is not correctly added to the computer's PATH.
+To solve this problem, install Git, restart the terminal, and run:
+git --version
+If Git is installed correctly, the command displays the installed Git version.
+
+
+
+
+
+
+
+
+
+
+B) API Reference Entry
+Create a New Task
+HTTP Method
+POST
+Endpoint
+/api/v1/projects/{projectId}/tasks
+Description
+This endpoint allows an authenticated user to create a new task inside a project management application.
+A task must have a title, an assignee, a due date, and a priority. The description is optional.
+The system automatically generates the task ID, status, creation time, and update time.
+Path Parameters
+Parameter
+Data Type
+Required
+Description
+projectId
+string
+Yes
+Unique ID of the project where the task will be created.
+
+Query Parameters
+This endpoint does not require any query parameters.
+Request Headers
+Header
+Required
+Description
+Authorization
+Yes
+Contains the authentication token using the Bearer scheme.
+Content-Type
+Yes
+Specifies that the request body is JSON.
+Accept
+Yes
+Specifies that the client expects a JSON response.
+
+Request Body Parameters
+Parameter
+Data Type
+Required
+Description
+title
+string
+Yes
+The name or title of the task.
+description
+string
+No
+Additional information about the task.
+assigneeId
+string
+Yes
+ID of the user assigned to the task.
+dueDate
+string
+Yes
+The deadline for completing the task in YYYY-MM-DD format.
+priority
+string
+Yes
+Task priority. Allowed values are low, medium, or high.
+
+Example Request
+POST /api/v1/projects/proj_1024/tasks
+Authorization: Bearer eyJhbGciOiJIUzI1NiIs...
+Content-Type: application/json
+Accept: application/json
+{
+  "title": "Complete database documentation",
+  "description": "Write and review the documentation for the project database.",
+  "assigneeId": "usr_2048",
+  "dueDate": "2026-10-15",
+  "priority": "high"
+}
+HTTP Response Codes
+201 Created
+The task was successfully created.
+400 Bad Request
+The request contains invalid or missing data.
+401 Unauthorized
+The authentication credentials are missing or invalid.
+403 Forbidden
+The authenticated user does not have permission to create tasks in the project.
+404 Not Found
+The specified project or assignee does not exist.
+409 Conflict
+The request conflicts with the current state of the project.
+422 Unprocessable Entity
+The request contains valid JSON but the supplied data fails validation.
+500 Internal Server Error
+An unexpected error occurred on the server.
+Example Successful Response
+HTTP Status: 201 Created
+{
+  "id": "task_78421",
+  "projectId": "proj_1024",
+  "title": "Complete database documentation",
+  "description": "Write and review the documentation for the project database.",
+  "assigneeId": "usr_2048",
+  "dueDate": "2026-10-15",
+  "priority": "high",
+  "status": "todo",
+  "createdAt": "2026-10-07T11:04:32Z",
+  "updatedAt": "2026-10-07T11:04:32Z"
+}
+Response Fields
+Field
+Data Type
+Description
+id
+string
+Unique ID generated for the new task.
+projectId
+string
+ID of the project containing the task.
+title
+string
+Title of the task.
+description
+string
+Description of the task.
+assigneeId
+string
+ID of the assigned user.
+dueDate
+string
+Task deadline in YYYY-MM-DD format.
+priority
+string
+Task priority: low, medium, or high.
+status
+string
+Initial status of the task.
+createdAt
+string
+Date and time when the task was created.
+updatedAt
+string
+Date and time when the task was last updated.
+
+
